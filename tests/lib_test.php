@@ -52,7 +52,7 @@ class lib_test extends \advanced_testcase {
         global $DB;
         $this->resetAfterTest();
         $count = $DB->count_records('tool_tweak');
-        // Two records on install;
+        // Two records on install.
         $this->assertEquals(2, $count);
         $DB->delete_records('tool_tweak');
 

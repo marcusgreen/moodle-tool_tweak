@@ -14,6 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+
+/**
+ * Process the form that imports json
+ *
+ * @package     tool_tweak
+ * @copyright   2023 Marcus Green
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 require_once('../../../../config.php');
 require_login();
 global $CFG;

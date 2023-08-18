@@ -1,4 +1,4 @@
-# Moodle Page tweak tool plugin by Marcus Green#
+# Moodle Page tweak tool plugin by Marcus Green
 
 Page tweaks, make minor alterations to what is displayed based
 on cohort membership, plugin tag or pagetype.

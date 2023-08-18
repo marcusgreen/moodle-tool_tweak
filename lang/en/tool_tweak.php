@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Generic plugin';
-$string['unusedstring'] = 'Unused string';
+$string['cachedef_tweakdata'] = 'Cachedef for  tweakdata';
+$string['pluginname'] = 'Page tweak';
 
 $string['tweakedit:export'] = 'Export';
 $string['tweakedit:export_help'] = 'Export help';

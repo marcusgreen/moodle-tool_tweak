@@ -130,7 +130,8 @@ class tool_tweak_edit_form extends moodleform {
         $mform->addHelpButton('css', 'tweakedit:css', 'tool_tweak');
         $mform->setType('css', PARAM_RAW);
 
-        $mform->addElement('textarea', 'javascript', get_string('tweakedit:javascript', 'tool_tweak'), ['rows' => 15, 'cols' => 80]);
+        $mform->addElement('textarea', 'javascript', get_string('tweakedit:javascript', 'tool_tweak'),
+         ['rows' => 15, 'cols' => 80]);
         $mform->addHelpButton('javascript', 'tweakedit:javascript', 'tool_tweak');
         $mform->setType('javascript', PARAM_RAW);
 

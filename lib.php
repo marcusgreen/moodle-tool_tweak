@@ -28,7 +28,13 @@
  * @copyright   2023 Marcus Green
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+/**
+ * Output the css/html/javascript for the tweak that
+ * match the filtered criteria.
+ * @return string
+ * @throws coding_exception
+ * @throws dml_exception
+ */
 function tool_tweak_before_footer() {
     global $DB;
     $cmid = optional_param('cmid', null, PARAM_INT);
@@ -89,7 +95,13 @@ function get_plugintags($cmid) {
     $plugintags = $DB->get_records_sql($sql, ['cmid' => $cmid]);
     return $plugintags;
 }
-
+/**
+ * Filter out tags that require tags not found
+ * in the current module setup.
+ * @param array $tweaks
+ * @param int $cmid
+ * @return array
+ */
 function filter_by_tag(array $tweaks, int $cmid) : array {
     $plugintags = get_plugintags($cmid);
     foreach ($tweaks as $key => $tweak) {
@@ -107,7 +119,7 @@ function filter_by_tag(array $tweaks, int $cmid) : array {
  * through alltweaks. Unset any
  * that do not have this pagetype.
  *
- * @param mixed $alltweaks
+ * @param array $tweaks
  * @return array
  */
 function filter_by_pagetype(array $tweaks) : array {
@@ -128,7 +140,7 @@ function filter_by_pagetype(array $tweaks) : array {
 /**
  * If a tweak has a cohort but the current user is not in that cohort
  * remove the tweak from alltweaks.
- * @param mixed $tweaks
+ * @param array $tweaks
  * @return array
  */
 function filter_by_cohort(array $tweaks) :array {
