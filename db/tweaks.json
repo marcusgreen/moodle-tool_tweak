@@ -1,0 +1,22 @@
+[{
+    "tweakname": "quiz-confirm-next",
+    "tag": "quiz-confirm-next",
+    "cohort": "",
+    "javascript": "\/*\r\n\u00a9 2021 Dominique Bauer\r\nCC0 1.0 Universal Public Domain Dedication\r\nhttps:\/\/dynamiccourseware.org\/course\/view.php?id=77&section=28\r\n*\/\r\n$(document).ready(function() {\r\n\r\n    $(\"input.mod_quiz-next-nav[value='Next page']\").on(\"focus\", function() {\r\n        var r = confirm(\"Are you sure you want to go to the NEXT PAGE?\\n\u2022 Click [OK] to go to the next page\\n\u2022 Click [Cancel] to stay on this page\");\r\n        if (r == true) {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n            $(\"input.mod_quiz-next-nav\").click()\r\n        } else {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n        };\r\n    });\r\n\r\n    $(\"input.mod_quiz-next-nav[value='Finish attempt ...']\").on(\"focus\", function() {\r\n        var r = confirm(\"Are you sure you want to FINISH THE ATTEMPT?\\n\u2022 Click [OK] to finish the attempt\\n\u2022 Click [Cancel] to stay on this page\");\r\n        if (r == true) {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n            $(\"input.mod_quiz-next-nav\").click()\r\n        } else {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n        };\r\n    });\r\n\r\n});\r\n",
+    "css": "",
+    "html": "<script src=\"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/3.6.0\/jquery.min.js\"><\/script>\r\n",
+    "pagetype": {
+        "1": "mod-quiz-attempt"
+    }
+},{
+    "tweakname": "quiz-big-question-text",
+    "tag": "quiz-big-question-text",
+    "cohort": "",
+    "javascript": "",
+    "css": ".que .qtext {\r\n  \tfont-size:2em;\r\n  \tcolor:red;\r\n  \tfont-style:italic;\r\n}",
+    "html": "",
+    "pagetype": {
+        "15": "mod-quiz-attempt",
+        "16": "question-bank-previewquestion-preview"
+    }
+}]

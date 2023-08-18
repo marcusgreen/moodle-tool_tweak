@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="admin/tool/tweak/db" VERSION="20230609" COMMENT="XMLDB file for Moodle admin/tool/tweak"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="tool_tweak" COMMENT="Instances to change page tweak i.e. css, html and javascript">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="tweakname" TYPE="char" LENGTH="35" NOTNULL="false" SEQUENCE="false" COMMENT="Name used to refer to this tweak"/>
+        <FIELD NAME="cohort" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Cohort: site wide groups" />
+        <FIELD NAME="tag" TYPE="char" LENGTH="35" NOTNULL="false" SEQUENCE="false" COMMENT="Tag that will bring in this code"/>
+        <FIELD NAME="css" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="javascript" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="html" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="tweakname_unique" TYPE="unique" FIELDS="tweakname" COMMENT="No duplicate tweak names"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="tool_tweak_pagetype" COMMENT="Pagetypes the tweak is applied to as found in global $PAGE. e.g. mod-quiz-attempt">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="tweak" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The tweak id these pages can be applied to"/>
+        <FIELD NAME="pagetype" TYPE="char" LENGTH="50" NOTNULL="false" SEQUENCE="false" COMMENT="Pagetypes as found in global $PAGE."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
