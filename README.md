@@ -13,6 +13,10 @@ a different way to manage output.
 Teachers can cause the tweak to be applied by adding a tag in the settings,e.g
 in the tags for a quiz.
 
+
+![alt text](./docs/images/settings.png "The settings page")
+
+
 ## Installing via uploaded ZIP file ##
 
 1. Log in to your Moodle site as an admin and go to _Site administration >
