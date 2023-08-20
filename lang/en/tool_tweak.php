@@ -36,12 +36,12 @@ $string['tweakedit:exportall'] = 'Export all';
 $string['tweakedit:exportall_help'] = 'Export all help';
 
 
-$string['tweakedit'] = 'tweak edit';
+$string['tweakedit'] = 'Tweak edit';
 $string['settings:showpagetype'] = 'Show pagetypes';
 $string['settings:showpagetype_text'] = 'The pagetype will be output in the page end if set and the user is an admin. For debug/development';
 
 $string['settings:pagetypes'] = 'Pagetypes';
-$string['settings:tweaksettings'] = 'tweak config settings';
+$string['settings:tweaksettings'] = 'Tweak config settings';
 $string['settings:pagetypes_text'] = 'Comma separated list of pagetypes that can be used';
 
 $string['tweakedit:name'] = 'Name';

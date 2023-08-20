@@ -33,8 +33,6 @@ import 'tool_tweak/codemirror/mode/markdown/markdown';
 import 'tool_tweak/codemirror/mode/meta/meta';
 import 'tool_tweak/codemirror/mode/htmlmixed/htmlmixed';
 
-//        mode: {name: "javascript", globalVars: true},
-
 export const init = () => {
     var editor = CodeMirror.fromTextArea(document.getElementById("id_css"), {
         lineNumbers: true,
