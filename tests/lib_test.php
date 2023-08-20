@@ -52,14 +52,15 @@ class lib_test extends \advanced_testcase {
         global $DB;
         $this->resetAfterTest();
         $count = $DB->count_records('tool_tweak');
-        // Two records on install.
-        $this->assertEquals(2, $count);
+        // Two records inserted from tweaks.json on install.
+        $this->assertEquals(3, $count);
         $DB->delete_records('tool_tweak');
 
          $tweak[] = (Object) [
             'tweakname' => 'Test tweak',
             'tag' => 'test tag',
             'cohort' => '',
+            'disabled' => 0,
             'javascript' => 'alert("hello world")',
             'CSS' => 'some css',
             'html' => '<h1>Hello</h1>',

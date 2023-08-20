@@ -37,6 +37,8 @@
  */
 function tool_tweak_before_footer() {
     global $DB;
+    $DB->set_debug(true);
+
     $cmid = optional_param('cmid', null, PARAM_INT);
     $id = optional_param('id', null , PARAM_INT);
 
@@ -55,7 +57,7 @@ function tool_tweak_before_footer() {
     }
     $tweakids = [];
     foreach ($tweaks as $tweak) {
-        $tweakids[] = $tweak->id;
+        $tweakids[$tweak->id] = $tweak->id;
     }
     if (count($tweakids)) {
         [$insql, $inparams] = $DB->get_in_or_equal($tweakids);
@@ -64,12 +66,11 @@ function tool_tweak_before_footer() {
     }
 
     $content = '';
-    if ($fulltweaks) {
+    if (isset($fulltweaks)) {
         foreach ($fulltweaks as $tweak) {
-                     $record = $DB->get_record('tool_tweak', ['id' => $tweak->id]);
-                     $content .= $record->html. PHP_EOL;
-                     $content .= '<script>'.$record->javascript. '</script>'.PHP_EOL;
-                     $content .= '<style>'.$record->css. '</style>'.PHP_EOL;
+                     $content .= $tweak->html. PHP_EOL;
+                     $content .= '<script>'.$tweak->javascript. '</script>'.PHP_EOL;
+                     $content .= '<style>'.$tweak->css. '</style>'.PHP_EOL;
         }
     }
 
@@ -106,7 +107,6 @@ function filter_by_tag(array $tweaks, int $cmid) : array {
     $plugintags = get_plugintags($cmid);
     foreach ($tweaks as $key => $tweak) {
         if ($tweak->tag) {
-            $i = 0;
             if (!in_array($tweak->tag, $plugintags )) {
                 unset($tweaks[$key]);
             }
@@ -145,7 +145,11 @@ function filter_by_pagetype(array $tweaks) : array {
  */
 function filter_by_cohort(array $tweaks) :array {
     global $DB, $USER;
-    $usercohorts = $DB->get_records_menu('cohort_members', ['userid' => $USER->id], 'id,userid');
+    $cache = cache::make('tool_tweak', 'tweakdata');
+    if (($usercohorts = $cache->get('usercohorts')) === false) {
+        $usercohorts = $DB->get_records_menu('cohort_members', ['userid' => $USER->id], 'id,userid');
+        $cache->set('usercohorts', $usercohorts);
+    }
     foreach ($tweaks as $key => $tweak) {
         if ($tweak->cohort > 0) {
             if (!in_array($tweak->cohort, $usercohorts)) {
@@ -165,7 +169,8 @@ function filter_by_cohort(array $tweaks) :array {
 function get_all_tweaks() : array {
     global $DB;
     $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype FROM {tool_tweak} tweak
-            LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id';
+            LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id
+            WHERE tweak.disabled <> 1';
     $alltweaks = $DB->get_recordset_sql($sql);
     $tweaks = [];
     foreach ($alltweaks as $tweak) {

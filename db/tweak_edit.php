@@ -101,7 +101,10 @@ class tool_tweak_edit_form extends moodleform {
         $mform->addElement('text', 'tweakname', get_string('name'));
         $mform->setType('tweakname', PARAM_TEXT);
         $mform->addHelpButton('tweakname', 'tweakedit:name', 'tool_tweak');
-        $mform->addRule('tweakname',  get_string("tweakedit:name_required", 'tool_tweak'), 'required', '', 'server');
+        $mform->addRule('tweakname',  get_string('tweakedit:name_required', 'tool_tweak'), 'required', '', 'server');
+
+        $mform->addElement('advcheckbox', 'disabled', get_string('tweakedit:disabled', 'tool_tweak'), ' ');
+        $mform->addHelpButton('disabled', 'tweakedit:disabled', 'tool_tweak');
 
         $options['multiple'] = true;
         $options['tags'] = true;
@@ -151,6 +154,7 @@ class tool_tweak_edit_form extends moodleform {
         $this->_form->getElement('tweakname')->setValue($tweak->tweakname ?? "");
         $this->_form->getElement('cohort')->setValue($tweak->cohort ?? "");
         $this->_form->getElement('tag')->setValue($tweak->tag ?? "");
+        $this->_form->getElement('disabled')->setValue($tweak->disabled ?? "");
         $this->_form->getElement('css')->setValue($tweak->css ?? "");
         $this->_form->getElement('javascript')->setValue($tweak->javascript ?? "");
         $this->_form->getElement('html')->setValue($tweak->html ?? "");
@@ -200,6 +204,7 @@ if ($data = $mform->get_data()) {
                 'tweakname' => $data->tweakname,
                 'cohort' => $data->cohort,
                 'tag' => $data->tag,
+                'disabled' => $data->disabled,
                 'css' => $data->css,
                 'javascript' => $data->javascript,
                 'html' => $data->html
@@ -316,6 +321,8 @@ function do_download(int $id = null) {
     foreach ($data as $key => $record) {
         $text['tweakname'] = $record->tweakname;
         $text['tag'] = $record->tag;
+        $text['cohort'] = $record->cohort;
+
         $text['javascript'] = $record->javascript;
         $text['css'] = $record->css;
         $text['html'] = $record->html;
