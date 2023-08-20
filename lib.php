@@ -37,23 +37,23 @@
  */
 function tool_tweak_before_footer() {
     global $DB;
-    $DB->set_debug(true);
+    $lib = new tool_tweak\lib();
 
     $cmid = optional_param('cmid', null, PARAM_INT);
     $id = optional_param('id', null , PARAM_INT);
 
     $cmid = $cmid ?? $id;
-    show_pagetype();
+    tool_tweak_show_pagetype();
     $cache = cache::make('tool_tweak', 'tweakdata');
     if (($tweaks = $cache->get('tweaks')) === false) {
-        $tweaks = get_all_tweaks();
+        $tweaks = $lib->get_all_tweaks();
         $cache->set('tweaks', $tweaks);
     }
 
-    $tweaks = filter_by_cohort($tweaks);
-    $tweaks = filter_by_pagetype($tweaks);
+    $tweaks = $lib->filter_by_cohort($tweaks);
+    $tweaks = $lib->filter_by_pagetype($tweaks);
     if ($cmid) {
-        $tweaks = filter_by_tag($tweaks, $cmid);
+        $tweaks = $lib->filter_by_tag($tweaks, $cmid);
     }
     $tweakids = [];
     foreach ($tweaks as $tweak) {
@@ -74,148 +74,9 @@ function tool_tweak_before_footer() {
         }
     }
 
-    $content = php_get_string($content);
+    $content = $lib->php_get_string($content);
+
     return $content;
-}
-
-/**
- * Get any tags set up for this plugin instance
- *
- * @param mixed $cmid
- * @return mixed
- */
-function get_plugintags($cmid) {
-    global $DB;
-    $sql = "SELECT name as tagname
-              FROM {tag_instance} ti
-              JOIN {tag} tag
-                ON ti.tagid=tag.id
-               AND ti.itemtype='course_modules'
-               AND ti.itemid = :cmid";
-
-    $plugintags = $DB->get_records_sql($sql, ['cmid' => $cmid]);
-    return $plugintags;
-}
-/**
- * Filter out tags that require tags not found
- * in the current module setup.
- * @param array $tweaks
- * @param int $cmid
- * @return array
- */
-function filter_by_tag(array $tweaks, int $cmid) : array {
-    $plugintags = get_plugintags($cmid);
-    foreach ($tweaks as $key => $tweak) {
-        if ($tweak->tag) {
-            if (!in_array($tweak->tag, $plugintags )) {
-                unset($tweaks[$key]);
-            }
-        }
-    }
-    return $tweaks;
-}
-/**
- * Take the current pagetype and loop
- * through alltweaks. Unset any
- * that do not have this pagetype.
- *
- * @param array $tweaks
- * @return array
- */
-function filter_by_pagetype(array $tweaks) : array {
-    global $PAGE;
-    $pagetype = $PAGE->pagetype;
-    $parts = explode('-', $PAGE->pagetype);
-    $plugintype = $parts[0].'-'.$parts[1];
-    foreach ($tweaks as $key => $tweak) {
-        if ($tweak->pagetype) {
-            if (($tweak->pagetype !== $pagetype) && ($tweak->pagetype !== $plugintype)) {
-                unset($tweaks[$key]);
-            }
-        }
-    }
-    return $tweaks;
-
-}
-/**
- * If a tweak has a cohort but the current user is not in that cohort
- * remove the tweak from alltweaks.
- * @param array $tweaks
- * @return array
- */
-function filter_by_cohort(array $tweaks) :array {
-    global $DB, $USER;
-    $cache = cache::make('tool_tweak', 'tweakdata');
-    if (($usercohorts = $cache->get('usercohorts')) === false) {
-        $usercohorts = $DB->get_records_menu('cohort_members', ['userid' => $USER->id], 'id,userid');
-        $cache->set('usercohorts', $usercohorts);
-    }
-    foreach ($tweaks as $key => $tweak) {
-        if ($tweak->cohort > 0) {
-            if (!in_array($tweak->cohort, $usercohorts)) {
-                unset($tweaks[$key]);
-            }
-
-        }
-    }
-    return $tweaks;
-}
-
-/**
- * Get all tweaks and associated page types
- *
- * @return array
- */
-function get_all_tweaks() : array {
-    global $DB;
-    $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype FROM {tool_tweak} tweak
-            LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id
-            WHERE tweak.disabled <> 1';
-    $alltweaks = $DB->get_recordset_sql($sql);
-    $tweaks = [];
-    foreach ($alltweaks as $tweak) {
-        $tweaks[] = $tweak;
-    }
-    return $tweaks;
-}
-
-/**
- * Get unique id values for all pagetypes currently stored
- * for this plugin
- *
- * @return array
- */
-function get_distinct_pagetypes() : array {
-    global $DB;
-    $pagetypes = $DB->get_records_sql('SELECT DISTINCT pagetype FROM {tool_skin_pagetype}');
-    return array_keys($pagetypes);
-}
-
-/**
- * Give javascript some of the Moodle core
- * get_string capability
- *
- * @param string $content
- * @return string
- */
-function php_get_string(string $content) {
-    preg_match_all('/get_string\\(.*?\)/', $content, $matches);
-    foreach ($matches[0] as $functioncall) {
-        $toreplace = $functioncall;
-        // Remove spaces and single quotes.
-        $functioncall = str_replace([" ", "'"], "", $functioncall);
-        // Get content between parentheseis.
-        preg_match('/\((.*?)\)/', $functioncall, $matches);
-        $params = explode(',', $matches[1]);
-        if (count($params) == 1) {
-            $string = get_string($params[0]);
-        } else {
-            $string = get_string($params[0], $params[1]);
-        }
-        $string = '"'.$string.'"';
-        $content = str_replace($toreplace, $string, $content);
-    }
-    return trim($content, '"');
 }
 
 /**
@@ -226,7 +87,7 @@ function php_get_string(string $content) {
  * @return int
  * @todo Implement error trapping
  */
-function import_json(string $json) : int {
+function tool_tweak_import_json(string $json) : int {
     $jsonobject = json_decode($json, false);
     global $DB;
     $recordcount = 0;
@@ -245,7 +106,7 @@ function import_json(string $json) : int {
  * Show the page type to the admin user
  * Purely for debug and setup
  */
-function show_pagetype() : void {
+function tool_tweak_show_pagetype() : void {
     global $USER, $PAGE;
     if (get_config('tool_tweak', 'showpagetype')) {
         if (is_siteadmin($USER->id)) {

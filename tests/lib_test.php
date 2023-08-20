@@ -40,7 +40,8 @@ class lib_test extends \advanced_testcase {
      */
     public function test_php_get_string() {
         $content = "get_string('pluginname', 'tool_tweak)";
-        $returnstring = php_get_string($content);
+        $lib = new lib();
+        $returnstring = $lib->php_get_string($content);
         $this->assertEquals("Page tweak", $returnstring);
     }
     /**
@@ -67,7 +68,7 @@ class lib_test extends \advanced_testcase {
             'pagetype' => ['mod-quiz-attempt', 'question-bank'],
          ];
          $json = json_encode($tweak, JSON_PRETTY_PRINT);
-         import_json($json);
+         tool_tweak_import_json($json);
          $count = $DB->count_records('tool_tweak');
          $this->assertEquals(1, $count);
 

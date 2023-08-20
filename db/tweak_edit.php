@@ -164,7 +164,7 @@ class tool_tweak_edit_form extends moodleform {
 $importform = new  import_form();
 if ($data = $importform->get_data()) {
     $content = $importform->get_file_content('jsonfile');
-    import_json($content);
+    tool_tweak_import_json($content);
 }
 $recordcount = $DB->count_records('tool_tweak');
 
