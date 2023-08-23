@@ -44,6 +44,9 @@ $string['settings:pagetypes'] = 'Pagetypes';
 $string['settings:tweaksettings'] = 'Tweak config settings';
 $string['settings:pagetypes_text'] = 'Comma separated list of pagetypes that can be used';
 
+$string['settings:disablecache'] = 'Disable cache';
+$string['settings:disablecache_text'] = 'Disable cache for when testing, so changes appear after saving';
+
 $string['tweakedit:name'] = 'Name';
 $string['tweakedit:importexportheader'] = 'Import/Export';
 $string['tweakedit:importexportheader_help'] = 'Import  and export in json format. Export the tweak currently being edited or all tweaks in the plugin';

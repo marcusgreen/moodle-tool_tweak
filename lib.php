@@ -50,6 +50,10 @@ function tool_tweak_before_footer() {
         $cache->set('tweaks', $tweaks);
     }
 
+    if (get_config('tool_tweak', 'disablecache')) {
+        $tweaks = $lib->get_all_tweaks();
+    }
+
     $tweaks = $lib->filter_by_cohort($tweaks);
     $tweaks = $lib->filter_by_pagetype($tweaks);
     if ($cmid) {

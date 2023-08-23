@@ -39,6 +39,9 @@ if (is_siteadmin()) {
     $settingspage->add(new admin_setting_configcheckbox('tool_tweak/showpagetype',
          get_string('settings:showpagetype', 'tool_tweak'),
          get_string('settings:showpagetype_text', 'tool_tweak') , 0));
+    $settingspage->add(new admin_setting_configcheckbox('tool_tweak/disablecache',
+         get_string('settings:disablecache', 'tool_tweak'),
+         get_string('settings:disablecache_text', 'tool_tweak') , 0));
 
     $ADMIN->add('tweakcategory',
         new admin_externalpage(
