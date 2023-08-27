@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="admin/tool/tweak/db" VERSION="20230819" COMMENT="XMLDB file for Moodle admin/tool/tweak"
+<XMLDB PATH="admin/tool/tweak/db" VERSION="20230826" COMMENT="XMLDB file for Moodle admin/tool/tweak"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
@@ -11,6 +11,7 @@
         <FIELD NAME="cohort" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Cohort: site wide groups"/>
         <FIELD NAME="tag" TYPE="char" LENGTH="35" NOTNULL="false" SEQUENCE="false" COMMENT="Tag that will bring in this code"/>
         <FIELD NAME="disabled" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false" COMMENT="prevent the tweak being processed"/>
+        <FIELD NAME="profilefield" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false" COMMENT="user profile field must be checkbox"/>
         <FIELD NAME="css" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="javascript" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="html" TYPE="text" NOTNULL="false" SEQUENCE="false"/>

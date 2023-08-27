@@ -118,6 +118,10 @@ class tool_tweak_edit_form extends moodleform {
         $mform->setType('tag', PARAM_TEXT);
         $mform->addHelpButton('tag', 'tweakedit:tag', 'tool_tweak');
 
+        $mform->addElement('text', 'profilefield', get_string('tweakedit:profilefield','tool_tweak'));
+        $mform->setType('profilefield', PARAM_TEXT);
+        $mform->addHelpButton('profilefield', 'tweakedit:profilefield', 'tool_tweak');
+
         $allcohorts = cohort_get_all_cohorts();
         $cohorts[''] = ''; ;
 
@@ -205,6 +209,7 @@ if ($data = $mform->get_data()) {
                 'cohort' => $data->cohort,
                 'tag' => $data->tag,
                 'disabled' => $data->disabled,
+                'profilefield' => $data->profilefield,
                 'css' => $data->css,
                 'javascript' => $data->javascript,
                 'html' => $data->html
@@ -322,7 +327,8 @@ function do_download(int $id = null) {
         $text['tweakname'] = $record->tweakname;
         $text['tag'] = $record->tag;
         $text['cohort'] = $record->cohort;
-
+        $text['disabled'] = $record->disabled;
+        $text['profilefield'] = $record->profilefield;
         $text['javascript'] = $record->javascript;
         $text['css'] = $record->css;
         $text['html'] = $record->html;

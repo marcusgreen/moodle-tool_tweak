@@ -45,10 +45,10 @@ function tool_tweak_before_footer() {
     $cmid = $cmid ?? $id;
     tool_tweak_show_pagetype();
     $cache = cache::make('tool_tweak', 'tweakdata');
-    if (($tweaks = $cache->get('tweaks')) === false) {
+    // if (($tweaks = $cache->get('tweaks')) === false) {
         $tweaks = $lib->get_all_tweaks();
-        $cache->set('tweaks', $tweaks);
-    }
+    //     $cache->set('tweaks', $tweaks);
+    // }
 
     if (get_config('tool_tweak', 'disablecache')) {
         $tweaks = $lib->get_all_tweaks();
@@ -56,6 +56,7 @@ function tool_tweak_before_footer() {
 
     $tweaks = $lib->filter_by_cohort($tweaks);
     $tweaks = $lib->filter_by_pagetype($tweaks);
+    $tweaks = $lib->filter_by_profilefield($tweaks);
     if ($cmid) {
         $tweaks = $lib->filter_by_tag($tweaks, $cmid);
     }
@@ -111,6 +112,7 @@ function tool_tweak_import_json(string $json) : int {
  * Purely for debug and setup
  */
 function tool_tweak_show_pagetype() : void {
+
     global $USER, $PAGE;
     if (get_config('tool_tweak', 'showpagetype')) {
         if (is_siteadmin($USER->id)) {

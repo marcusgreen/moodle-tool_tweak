@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace tool_tweak;
+require_once($CFG->dirroot.'/user/profile/lib.php');
 
 /**
  * Class lib
@@ -89,6 +90,27 @@ class lib {
         return $tweaks;
     }
     /**
+     * Filter out tweaks where the profilefield is not blank and that
+     * is not checked (set to "1! for the user). Must be a checkbox
+     * profile field type.
+     * @param array $tweaks
+     * @return array
+     */
+    public function filter_by_profilefield(array $tweaks) : array {
+        global $USER;
+        foreach ($tweaks as $key => $tweak) {
+            if ($tweak->profilefield <> '') {
+                if (array_key_exists($tweak->profilefield, $USER->profile )) {
+                    if ($USER->profile[$tweak->profilefield] <> "1") {
+                        unset($tweaks[$key]);
+                    }
+                }
+            }
+        }
+        return $tweaks;
+    }
+
+    /**
      * Get all tweaks and associated page types
      * minus the actual content (html,css,javascript)
      *
@@ -96,7 +118,7 @@ class lib {
      */
     public function get_all_tweaks() : array {
         global $DB;
-        $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype FROM {tool_tweak} tweak
+        $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype,disabled,profilefield FROM {tool_tweak} tweak
                 LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id
                 WHERE tweak.disabled <> 1';
         $alltweaks = $DB->get_recordset_sql($sql);
