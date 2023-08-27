@@ -15,6 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace tool_tweak;
+
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->dirroot.'/user/profile/lib.php');
 
 /**
@@ -118,7 +121,7 @@ class lib {
      */
     public function get_all_tweaks() : array {
         global $DB;
-        $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype,disabled,profilefield FROM {tool_tweak} tweak
+        $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype, disabled, profilefield FROM {tool_tweak} tweak
                 LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id
                 WHERE tweak.disabled <> 1';
         $alltweaks = $DB->get_recordset_sql($sql);
