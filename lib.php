@@ -45,10 +45,10 @@ function tool_tweak_before_footer() {
     $cmid = $cmid ?? $id;
     tool_tweak_show_pagetype();
     $cache = cache::make('tool_tweak', 'tweakdata');
-    // if (($tweaks = $cache->get('tweaks')) === false) {
+    if (($tweaks = $cache->get('tweaks')) === false) {
         $tweaks = $lib->get_all_tweaks();
-    //     $cache->set('tweaks', $tweaks);
-    // }
+        $cache->set('tweaks', $tweaks);
+    }
 
     if (get_config('tool_tweak', 'disablecache')) {
         $tweaks = $lib->get_all_tweaks();
