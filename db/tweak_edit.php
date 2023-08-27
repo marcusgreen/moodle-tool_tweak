@@ -118,7 +118,7 @@ class tool_tweak_edit_form extends moodleform {
         $mform->setType('tag', PARAM_TEXT);
         $mform->addHelpButton('tag', 'tweakedit:tag', 'tool_tweak');
 
-        $mform->addElement('text', 'profilefield', get_string('tweakedit:profilefield','tool_tweak'));
+        $mform->addElement('text', 'profilefield', get_string('tweakedit:profilefield', 'tool_tweak'));
         $mform->setType('profilefield', PARAM_TEXT);
         $mform->addHelpButton('profilefield', 'tweakedit:profilefield', 'tool_tweak');
 
