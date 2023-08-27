@@ -61,6 +61,7 @@ class lib_test extends \advanced_testcase {
             'tweakname' => 'Test tweak',
             'tag' => 'test tag',
             'cohort' => '',
+            'profilefiled' => '',
             'disabled' => 0,
             'javascript' => 'alert("hello world")',
             'CSS' => 'some css',
