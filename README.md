@@ -1,4 +1,7 @@
 # Moodle Page tweak tool plugin by Marcus Green
+[![Moodle Plugin CI](https://github.com/marcusgreen/moodle-tool_tweak/actions/workflows/moodle-ci.yml/badge.svg)](https://github.com/marcusgreen/moodle-tool_tweak/actions/workflows/moodle-ci.yml) [![GitHub Release](https://img.shields.io/github/release/marcusgreen/moodle-tool_tweak.svg)](https://github.com/marcusgreen//moodle-tool_tweak/releases)
+[![Moodle Support](https://img.shields.io/badge/Moodle-%3E%3D%204.0-blue)](https://github.com/marcusgreen/moodle-tool_tweak/actions)
+
 
 Page tweaks, make minor alterations to what is displayed based
 on cohort membership, plugin tag or pagetype.
