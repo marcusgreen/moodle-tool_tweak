@@ -6,6 +6,8 @@
 Page tweaks, make minor alterations to what is displayed based
 on cohort membership, plugin tag or pagetype.
 
+The home of this plugin is https://github.com/marcusgreen/moodle-tool_tweak
+
 Site admins can create tweaks containing javascript and css
 and which page types they can apply to. The pagetype is taken from
 the global $PAGE variable. This script was hugely influenced by the
