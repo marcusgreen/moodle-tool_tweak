@@ -88,7 +88,8 @@ class tool_tweak_edit_form extends moodleform {
 
         $mform->setExpanded('importexportheader', false);
 
-        $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">Import</div></a>    ');
+        $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">'
+            .get_string('tweakedit:import', 'tool_tweak').'</div></a>');
 
         $mform->addElement('submit', 'export', get_string('tweakedit:export', 'tool_tweak'));
         $mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');

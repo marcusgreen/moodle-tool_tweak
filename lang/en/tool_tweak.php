@@ -30,6 +30,8 @@ $string['tweakedit:disabled'] = 'Disabled';
 $string['tweakedit:disabled_help'] = 'When this tweak is disabled the output will not be displayed.';
 
 $string['tweakedit:export'] = 'Export';
+$string['tweakedit:import'] = 'Import';
+
 $string['tweakedit:export_help'] = 'Export help';
 
 $string['tweakedit:exportall'] = 'Export all';
