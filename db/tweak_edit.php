@@ -88,7 +88,8 @@ class tool_tweak_edit_form extends moodleform {
 
         $mform->setExpanded('importexportheader', false);
 
-        $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">Import</div></a>    ');
+        $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">'
+            .get_string('tweakedit:import', 'tool_tweak').'</div></a>');
 
         $mform->addElement('submit', 'export', get_string('tweakedit:export', 'tool_tweak'));
         $mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');
@@ -118,7 +119,15 @@ class tool_tweak_edit_form extends moodleform {
         $mform->setType('tag', PARAM_TEXT);
         $mform->addHelpButton('tag', 'tweakedit:tag', 'tool_tweak');
 
-        $mform->addElement('text', 'profilefield', get_string('tweakedit:profilefield', 'tool_tweak'));
+        $fields = profile_get_custom_fields(true);
+        $profilefields[''] = '';
+        foreach ($fields as $field) {
+            if ($field->datatype === 'checkbox') {
+                $profilefields[$field->shortname] = $field->name;
+            }
+        }
+
+        $mform->addElement('select', 'profilefield', get_string('tweakedit:profilefield', 'tool_tweak') , $profilefields);
         $mform->setType('profilefield', PARAM_TEXT);
         $mform->addHelpButton('profilefield', 'tweakedit:profilefield', 'tool_tweak');
 
