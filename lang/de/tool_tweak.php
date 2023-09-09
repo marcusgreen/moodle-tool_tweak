@@ -24,31 +24,30 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['cachedef_tweakdata'] = 'Cachedef for  tweakdata';
+$string['cachedef_tweakdata'] = 'Cachedef für tweakdata';
 $string['pluginname'] = 'Page tweak';
-$string['tweakedit:disabled'] = 'Disabled';
-$string['tweakedit:disabled_help'] = 'When this tweak is disabled the output will not be displayed.';
+$string['tweakedit:disabled'] = 'Deaktiviert';
+$string['tweakedit:disabled_help'] = 'Falls dieser Tweak deaktiviert ist, werden die unten erfassten Anpassungen nicht ausgeführt/angezeigt.';
 
-//$string['tweakedit:import'] = 'Importieren'; //  --> Button not impolemented in the same way (no translation possible).
-//$string['tweakedit:import_help'] = 'Hilfe für [Importieren]';
+$string['tweakedit:import'] = 'Importieren';
+$string['tweakedit:import_help'] = 'Hilfe für Importieren';
 
 $string['tweakedit:export'] = 'Exportieren';
-$string['tweakedit:export_help'] = 'Hilfe für [Exportieren]';
+$string['tweakedit:export_help'] = 'Hilfe für Exportieren';
 
 $string['tweakedit:exportall'] = 'Alle exportieren';
-$string['tweakedit:exportall_help'] = 'Hilfe für [Alle exportieren]';
-
+$string['tweakedit:exportall_help'] = 'Hilfe für Alle exportieren';
 
 $string['tweakedit'] = 'Tweak edit';
-$string['settings:showpagetype'] = 'Show pagetypes';
-$string['settings:showpagetype_text'] = 'The pagetype will be output in the page end if set and the user is an admin. For debug/development';
+$string['settings:showpagetype'] = 'Pagetypes anzeigen';
+$string['settings:showpagetype_text'] = 'Der pagetype wird zu Debugging-/Entwicklungszwecken allen Admin-Usern auf der Seite  angezeigt, falls aktiviert.';
 
 $string['settings:pagetypes'] = 'Pagetypes';
-$string['settings:tweaksettings'] = 'Tweak config settings';
-$string['settings:pagetypes_text'] = 'Comma separated list of pagetypes that can be used';
+$string['settings:tweaksettings'] = 'Einstellungen für Tweaks';
+$string['settings:pagetypes_text'] = 'Durch Kommas getrennte Liste von pagetypes, für welche dieser Tweak aktiviert wird.';
 
-$string['settings:disablecache'] = 'Disable cache';
-$string['settings:disablecache_text'] = 'Disable cache for when testing, so changes appear after saving';
+$string['settings:disablecache'] = 'Cache deaktivieren';
+$string['settings:disablecache_text'] = 'Cache während der Erstellung des Tweaks deaktivieren, damit Änderungen sofort sichtbar sind.';
 
 $string['tweakedit:name'] = 'Name';
 $string['tweakedit:importexportheader'] = 'Tweaks importieren/exportieren';
@@ -61,17 +60,17 @@ $string['tweakedit:name_required'] = 'der Name darf nicht leer sein';
 $string['tweakedit:upload'] = 'Eine JSON-Datei hochladen ...';
 $string['tweakedit:tag'] = 'Tag';
 $string['tweakedit:tag_help'] = 'Der Tag wurde zu einem Kurs-Modul hinzugefügt';
-$string['tweakedit:cohort'] = 'Cohort';
-$string['tweakedit:cohort_help'] = 'If any cohorts (site wide groups) exist they will show up here. If a cohort is selected the tweak will be filtered out for anyone who is not a member';
+$string['tweakedit:cohort'] = 'Globale Gruppen';
+$string['tweakedit:cohort_help'] = 'Falls globale Gruppen erfasst sind (Website-Administration ->Nutzer/innen ->Nutzerkonten ->Globale Gruppen), werden diese hier angezeigt. Falls eine globale Gruppe ausgewählt ist, wird der Tweak nur dieser Gruppe angezeigt.';
 $string['tweakedit:pagetype'] = 'Pagetype';
-$string['tweakedit:pagetype_help'] = 'Pagetype name used internally by Moodle. If the tweak setting showpagetype is set, the pagetype will be shown at the end of each page to admin users.';
-$string['tweakedit:css'] = 'CSS, Ctrl-space for hints';
-$string['tweakedit:css_help'] = 'CSS without opening and clozing style tags. Ctrl-space will show popup help with syntax';
+$string['tweakedit:pagetype_help'] = 'Moodle-interner pagetype Name. Der pagetype wird zu Debugging-/Entwicklungszwecken allen Admin-Usern am Ende jeder Seite angezeigt, falls pagetype anzeigen aktiviert ist.';
+$string['tweakedit:css'] = 'CSS, Ctrl-Space um Tipps anzuzeigen';
+$string['tweakedit:css_help'] = 'CSS ohne style-Tags. Ctrl-Space öffnet Pop-up-Hilfe mit Tipps';
 $string['tweakedit:javascript'] = 'Javascript';
-$string['tweakedit:javascript_help'] = 'Javascript withoutout opening and closing script tags. calls to get_string will be converted as if this was PHP';
+$string['tweakedit:javascript_help'] = 'Javascript ohne Script-Tags. Aufrufe von get_string werden wie in PHP umgewandelt.';
 $string['tweakedit:html'] = 'HTML';
-$string['tweakedit:profilefield'] = 'Profile field';
-$string['tweakedit:profilefield_help'] = 'Shortname of a checkbox user profile field. Admins can add/modify from /user/profile/index.php';
-$string['tweakedit:html_help'] = 'HTML put here is output before any javascript in the tweak. Put links to Content delivery systems (CDN\'s) here';
-$string['cachedef_tweak'] = 'Description of the tweak data cache';
+$string['tweakedit:profilefield'] = 'Profilfelder';
+$string['tweakedit:profilefield_help'] = 'Shortname von selbst erstellten Checkbox-Profilfeldern. Admins können diese unter /user/profile/index.php hinzufügen und bearbeiten.';
+$string['tweakedit:html_help'] = 'Der hier eingegebene HTML-Code wird vor allfälligem javascript-Code im Tweak ausgegeben. Links zu Content Delivery Systems (CDN\'s) hier einfügen.';
+$string['cachedef_tweak'] = 'Beschreibung des Tweak-Data-Cache';
 $string['returntoediting'] = 'Zurück zur Bearbeitung';
