@@ -138,7 +138,7 @@ class tool_tweak_edit_form extends moodleform {
             $cohorts[$cohort->id] = $cohort->name;
         }
 
-        $mform->addElement('select', 'cohort', 'Cohort', $cohorts);
+        $mform->addElement('select', 'cohort', get_string('tweakedit:cohort', 'tool_tweak'), $cohorts);
         $mform->addHelpButton('cohort', 'tweakedit:cohort', 'tool_tweak');
         $mform->setType('cohort', PARAM_RAW);
 
