@@ -40,18 +40,18 @@ $string['tweakedit:exportall_help'] = 'Hilfe für Alle exportieren';
 
 $string['tweakedit'] = 'Tweak edit';
 $string['settings:showpagetype'] = 'Pagetypes anzeigen';
-$string['settings:showpagetype_text'] = 'Der pagetype wird zu Debugging-/Entwicklungszwecken allen Admin-Usern auf der Seite  angezeigt, falls aktiviert.';
+$string['settings:showpagetype_text'] = 'Falls aktiviert, wird der Pagetype zu Debugging-/Entwicklungszwecken allen Admin-Usern oben auf der Seite angezeigt.';
 
 $string['settings:pagetypes'] = 'Pagetypes';
 $string['settings:tweaksettings'] = 'Einstellungen für Tweaks';
-$string['settings:pagetypes_text'] = 'Durch Kommas getrennte Liste von pagetypes, für welche dieser Tweak aktiviert wird.';
+$string['settings:pagetypes_text'] = 'Durch Kommas getrennte Liste von Pagetypes, für welche dieser Tweak aktiviert wird.';
 
 $string['settings:disablecache'] = 'Cache deaktivieren';
 $string['settings:disablecache_text'] = 'Cache während der Erstellung des Tweaks deaktivieren, damit Änderungen sofort sichtbar sind.';
 
 $string['tweakedit:name'] = 'Name';
 $string['tweakedit:importexportheader'] = 'Tweaks importieren/exportieren';
-$string['tweakedit:importexportheader_help'] = 'Tweaks können im json-Format importiert oder exportiert werden. Es stehen zwei Export-Möglichkeitne zur Verfügung 1) [Exportieren] für den aktuell angezeigten Tweak und 2) [Alle exportieren] für alle Tweaks aus dem Plugin.';
+$string['tweakedit:importexportheader_help'] = 'Tweaks können im JSON-Format importiert oder exportiert werden. Es stehen zwei Export-Möglichkeitne zur Verfügung 1) [Exportieren] für den aktuell angezeigten Tweak und 2) [Alle exportieren] für alle Tweaks aus dem Plugin.';
 
 $string['tweakedit:editheader'] = 'Tweaks bearbeiten';
 
@@ -61,7 +61,7 @@ $string['tweakedit:upload'] = 'Eine JSON-Datei hochladen ...';
 $string['tweakedit:tag'] = 'Tag';
 $string['tweakedit:tag_help'] = 'Der Tag wurde zu einem Kurs-Modul hinzugefügt';
 $string['tweakedit:cohort'] = 'Globale Gruppen';
-$string['tweakedit:cohort_help'] = 'Falls globale Gruppen erfasst sind (Website-Administration ->Nutzer/innen ->Nutzerkonten ->Globale Gruppen), werden diese hier angezeigt. Falls eine globale Gruppe ausgewählt ist, wird der Tweak nur dieser Gruppe angezeigt.';
+$string['tweakedit:cohort_help'] = 'Falls globale Gruppen erfasst sind (/cohort/index.php), werden diese hier angezeigt. Wird hier eine globale Gruppe ausgewählt, ist der Tweak nur für diese Gruppe aktiv.';
 $string['tweakedit:pagetype'] = 'Pagetype';
 $string['tweakedit:pagetype_help'] = 'Moodle-interner pagetype Name. Der pagetype wird zu Debugging-/Entwicklungszwecken allen Admin-Usern am Ende jeder Seite angezeigt, falls pagetype anzeigen aktiviert ist.';
 $string['tweakedit:css'] = 'CSS, Ctrl-Space um Tipps anzuzeigen';
