@@ -113,11 +113,14 @@ function tool_tweak_import_json(string $json) : int {
  */
 function tool_tweak_show_pagetype() : void {
 
-    global $USER, $PAGE;
+    global $USER, $PAGE, $OUTPUT;
     if (get_config('tool_tweak', 'showpagetype')) {
         if (is_siteadmin($USER->id)) {
             $msg = 'page-type:'.$PAGE->pagetype;
-            \core\notification::add($msg, \core\notification::WARNING);
+            ob_start();
+            echo $msg;
+            // echo $OUTPUT->notification($msg);
+           // \core\notification::add($msg, \core\notification::WARNING);
         }
     }
 }
