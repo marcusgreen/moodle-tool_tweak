@@ -2,31 +2,58 @@
     "tweakname": "Simple question edit",
     "tag": "",
     "cohort": "0",
+    "disabled": null,
+    "profilefield": null,
     "javascript": "\/**\r\nSimplify the question editing interface to remove\r\nsome elements that less frequently used.\r\n\r\nID Number\r\nMultiple tries (AKA Hints)\r\nTAGS\r\nCombined feedback\r\n\r\nSuited to use with cohort membership (site wide groups)\r\nSee yoursite\/\/cohort\/index.php\r\n\r\n**\/\r\n\r\nif(window.location.href.indexOf(\"editquestion\") > -1)  {\r\n  document.getElementById('id_tagsheader').style.display='none';\r\n  document.getElementById('id_multitriesheader').style.display='none';\r\n  document.getElementById('fitem_id_idnumber').style.display='none';\r\n  document.getElementById('id_feedbackheader').style.display='none';\r\n}\r\n\r\n",
     "css": "",
     "html": "",
     "pagetype": {
-        "17": "question-type"
+        "1": "question-type"
     }
 },{
     "tweakname": "quiz-confirm-next",
     "tag": "quiz-confirm-next",
     "cohort": "0",
+    "disabled": null,
+    "profilefield": null,
     "javascript": "\/*\r\n\u00a9 2021 Dominique Bauer\r\nCC0 1.0 Universal Public Domain Dedication\r\nhttps:\/\/dynamiccourseware.org\/course\/view.php?id=77&section=28\r\n*\/\r\n$(document).ready(function() {\r\n\r\n    $(\"input.mod_quiz-next-nav[value='Next page']\").on(\"focus\", function() {\r\n        var r = confirm(\"Are you sure you want to go to the NEXT PAGE?\\n\u2022 Click [OK] to go to the next page\\n\u2022 Click [Cancel] to stay on this page\");\r\n        if (r == true) {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n            $(\"input.mod_quiz-next-nav\").click()\r\n        } else {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n        };\r\n    });\r\n\r\n    $(\"input.mod_quiz-next-nav[value='Finish attempt ...']\").on(\"focus\", function() {\r\n        var r = confirm(\"Are you sure you want to FINISH THE ATTEMPT?\\n\u2022 Click [OK] to finish the attempt\\n\u2022 Click [Cancel] to stay on this page\");\r\n        if (r == true) {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n            $(\"input.mod_quiz-next-nav\").click()\r\n        } else {\r\n            $(\"input.mod_quiz-next-nav\").blur()\r\n        };\r\n    });\r\n\r\n});\r\n",
     "css": "",
     "html": "<script src=\"https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/3.6.0\/jquery.min.js\"><\/script>\r\n",
     "pagetype": {
-        "1": "mod-quiz-attempt"
+        "2": "mod-quiz-attempt"
     }
 },{
-    "tweakname": "quiz-big-question-text",
+    "tweakname": "multichoice-limit",
     "tag": "",
     "cohort": "0",
-    "javascript": "",
-    "css": ".que .qtext {\r\n  \tfont-size:2em;\r\n  \tcolor:red;\r\n  \tfont-style:italic;\r\n}",
+    "disabled": "1",
+    "profilefield": "",
+    "javascript": "\/**\r\nLimit the number of options that can be selected in a \r\nmultiple choice to 2. \r\n**\/\r\nvar checkboxes = document.querySelectorAll('input[type=\"checkbox\"][name*=\"choice\"]');\r\ndebugger;\r\nvar counter = 0;\r\n\r\ninit(checkboxes);\r\n\r\nfunction init(checkboxes){\r\n  checkboxes.forEach(function(box) {\r\n    if(box.checked){\r\n      counter++;\r\n    }\r\n  });\r\n}\r\nfunction limitSelections(checkbox) {\r\n  debugger;\r\n  checkbox.addEventListener('click', (e) => {\r\n\tif(counter > 1){\r\n      if(checkbox.checked == false){\r\n        counter--;\r\n      }\r\n\r\n      checkbox.checked = false;\r\n      \r\n    }else{\r\n      if(checkbox.checked == false){\r\n        counter --;\r\n      }else {\r\n      \tcounter++;\r\n      }\r\n    }\r\n    \r\n  });\r\n}\r\n\r\ncheckboxes.forEach(limitSelections);\r\n\r\n\r\n",
+    "css": "",
     "html": "",
     "pagetype": {
-        "6": "mod-quiz-attempt",
-        "7": "question-bank-previewquestion-preview"
+        "37": "mod-quiz-attempt"
+    }
+},{
+    "tweakname": "pretty-button",
+    "tag": "",
+    "cohort": "0",
+    "disabled": "0",
+    "profilefield": "",
+    "javascript": "\/**\r\nChange quiz buttons Next,Previous and Check from input type to\r\nbutton type and add font-awesome icons (checkmarks and arrows).\r\nAdd some CSS to change the appearance of other parts of the quiz.\r\n**\/\r\n\r\n\r\nvar check = document.getElementsByClassName('submit');\r\nif(check.length > 0){\r\n\tcheck = check[0];\r\n\tvar icon= '<i class=\"icon fa fa-check-circle-o\" aria-hidden=\"true\"><\/i> '+check.value;\r\n\tcheck.outerHTML = check.outerHTML.replace(\/\\<input\/, '<button class=\"pretty\" ' ) + icon+ '<\/button>';\r\n}\r\n\r\nvar previous = document.querySelectorAll('[name=\"previous\"]');\r\nif(previous.length > 0){\r\n\tprevious = previous[0];\r\n\tvar icon= '<i class=\"icon fa fa-arrow-left\" aria-hidden=\"true\"><\/i> '+previous.value;\r\n\tprevious.outerHTML = previous.outerHTML.replace(\/^\\<input\/, '<button class=\"pretty\"') + icon+ '<\/button>';\r\n}\r\nvar next = document.querySelectorAll('[name=\"next\"]');\r\nif(next.length > 0){\r\n\tnext = next[0];\r\n\tvar icon= '<i class=\"icon fa fa-arrow-right primary\" aria-hidden=\"true\"><\/i> '+next.value;\r\n\tnext.outerHTML = next.outerHTML.replace(\/^\\<input\/, '<button class =\"pretty mod_quiz-next-nav\" ') + icon+ '<\/button>';\r\n}",
+    "css": ".que {\r\n\tborder: black solid thin;\r\n  \tpadding:4px;\r\n}\r\n.que .info{\r\n   border-radius:19px;\r\n   box-shadow: 2px 2px #7bc1f7;\r\n}\r\n.pretty{\r\n color: white;\r\n background:#1a73d9;\r\n border-radius:2em;\r\n}\r\n.pretty:hover{\r\n  background:#2c83ee;\r\n}\r\n.ablock{\r\n\tfont-size:110%;\r\n}\r\n.qtext{\r\n \tfont-size:110%;\r\n}\r\n.prompt{\r\n \tfont-size:110%;\r\n}\r\n.outcome{\r\n \tfont-size:110%; \r\n}\r\n\r\n",
+    "html": "",
+    "pagetype": []
+}{
+    "tweakname": "Rubric Grading",
+    "tag": "",
+    "cohort": "0",
+    "disabled": "0",
+    "profilefield": "",
+    "javascript": "",
+    "css": "\/**\r\nWhen grading withthe rubric advanced grading type\r\nMake the popup fill all available space.\r\n**\/\r\n\r\n.gradingform_rubric {\r\n  width:100%;\r\n}\r\n\r\n.gradingform_rubric .criteria {\r\n     display: inline-table;\r\n\r\n}\r\n.gradingform_rubric .criterion .remark textarea {\r\n    resize: both;\r\n    width: 100%;\r\n}\r\n",
+    "html": "",
+    "pagetype": {
+        "38": "mod-assign-grader"
     }
 }]
