@@ -159,7 +159,7 @@ class tool_tweak_edit_form extends moodleform {
     /**
      * Sets the data before the form is displayed
      *
-     * @param Object $tweak
+     * @param \stdClass $tweak
      * @return void
      */
     public function set_data($tweak) {
@@ -315,7 +315,7 @@ function get_pagetypes(stdClass $record) {
     return $record;
 }
 /**
- * Down load the tweak related to the given id
+ * Download/export the tweak related to the given id
  * in json format so it can be re-used
  * @param int|null $id
  * @return never

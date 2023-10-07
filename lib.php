@@ -100,6 +100,7 @@ function tool_tweak_import_json(string $json) : int {
         $recordcount++;
         $pagetypes = $field->pagetype;
         unset($field->pagetype);
+        xdebug_break();
         $tweakid = $DB->insert_record('tool_tweak', $field);
         foreach ($pagetypes as $pagetype) {
             $DB->insert_record('tool_tweak_pagetype', ['tweak' => $tweakid, 'pagetype' => $pagetype]);

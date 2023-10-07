@@ -1,14 +1,14 @@
-[{
+<div class="notifytiny debuggingmessage" data-rel="debugging">String does not exist. Please check your string definition for cookiehttponly/admin<ul style="text-align: left" data-rel="backtrace"><li>line 10788 of /lib/moodlelib.php: call to debugging()</li><li>line 167 of /admin/settings/security.php: call to lang_string->__construct()</li><li>line 8707 of /lib/adminlib.php: call to require()</li><li>line 8588 of /lib/adminlib.php: call to admin_get_root()</li><li>line 47 of /admin/tool/tweak/db/tweak_edit.php: call to admin_externalpage_setup()</li></ul></div><div class="notifytiny debuggingmessage" data-rel="debugging">String does not exist. Please check your string definition for configcookiehttponly/admin<ul style="text-align: left" data-rel="backtrace"><li>line 10788 of /lib/moodlelib.php: call to debugging()</li><li>line 167 of /admin/settings/security.php: call to lang_string->__construct()</li><li>line 8707 of /lib/adminlib.php: call to require()</li><li>line 8588 of /lib/adminlib.php: call to admin_get_root()</li><li>line 47 of /admin/tool/tweak/db/tweak_edit.php: call to admin_externalpage_setup()</li></ul></div>[{
     "tweakname": "Simple question edit",
     "tag": "",
     "cohort": "0",
-    "disabled": null,
-    "profilefield": null,
-    "javascript": "\/**\r\nSimplify the question editing interface to remove\r\nsome elements that less frequently used.\r\n\r\nID Number\r\nMultiple tries (AKA Hints)\r\nTAGS\r\nCombined feedback\r\n\r\nSuited to use with cohort membership (site wide groups)\r\nSee yoursite\/\/cohort\/index.php\r\n\r\n**\/\r\n\r\nif(window.location.href.indexOf(\"editquestion\") > -1)  {\r\n  document.getElementById('id_tagsheader').style.display='none';\r\n  document.getElementById('id_multitriesheader').style.display='none';\r\n  document.getElementById('fitem_id_idnumber').style.display='none';\r\n  document.getElementById('id_feedbackheader').style.display='none';\r\n}\r\n\r\n",
+    "disabled": "0",
+    "profilefield": "",
+    "javascript": "\/**\r\nSimplify the question editing interface to remove\r\nsome elements that less frequently used.\r\n\r\nID Number\r\nMultiple tries (AKA Hints)\r\nTAGS\r\nCombined feedback\r\n\r\nCredit to Markus Killer for the idea for this tweak\r\n\r\nSuited to use with cohort membership (site wide groups)\r\nSee yoursite\/\/cohort\/index.php\r\n\r\n**\/\r\n\r\nif(window.location.href.indexOf(\"editquestion\") > -1)  {\r\n  document.getElementById('id_tagsheader').style.display='none';\r\n  document.getElementById('id_multitriesheader').style.display='none';\r\n  document.getElementById('fitem_id_idnumber').style.display='none';\r\n  document.getElementById('id_feedbackheader').style.display='none';\r\n}\r\n\r\n",
     "css": "",
     "html": "",
     "pagetype": {
-        "1": "question-type"
+        "40": "question-type"
     }
 },{
     "tweakname": "quiz-confirm-next",
@@ -44,16 +44,26 @@
     "css": ".que {\r\n\tborder: black solid thin;\r\n  \tpadding:4px;\r\n}\r\n.que .info{\r\n   border-radius:19px;\r\n   box-shadow: 2px 2px #7bc1f7;\r\n}\r\n.pretty{\r\n color: white;\r\n background:#1a73d9;\r\n border-radius:2em;\r\n}\r\n.pretty:hover{\r\n  background:#2c83ee;\r\n}\r\n.ablock{\r\n\tfont-size:110%;\r\n}\r\n.qtext{\r\n \tfont-size:110%;\r\n}\r\n.prompt{\r\n \tfont-size:110%;\r\n}\r\n.outcome{\r\n \tfont-size:110%; \r\n}\r\n\r\n",
     "html": "",
     "pagetype": []
-}{
+},{
     "tweakname": "Rubric Grading",
     "tag": "",
     "cohort": "0",
     "disabled": "0",
     "profilefield": "",
     "javascript": "",
-    "css": "\/**\r\nWhen grading withthe rubric advanced grading type\r\nMake the popup fill all available space.\r\n**\/\r\n\r\n.gradingform_rubric {\r\n  width:100%;\r\n}\r\n\r\n.gradingform_rubric .criteria {\r\n     display: inline-table;\r\n\r\n}\r\n.gradingform_rubric .criterion .remark textarea {\r\n    resize: both;\r\n    width: 100%;\r\n}\r\n",
+    "css": "\/**\r\nWhen grading with the rubric advanced grading type\r\nMake the popup fill all available space.\r\n**\/\r\n\r\n.gradingform_rubric {\r\n  width:100%;\r\n}\r\n\r\n.gradingform_rubric .criteria {\r\n     display: inline-table;\r\n\r\n}\r\n.gradingform_rubric .criterion .remark textarea {\r\n    resize: both;\r\n    width: 100%;\r\n}\r\n",
     "html": "",
     "pagetype": {
-        "38": "mod-assign-grader"
+        "39": "mod-assign-grader"
     }
+}{
+    "tweakname": "google-translate",
+    "tag": "",
+    "cohort": "0",
+    "disabled": "0",
+    "profilefield": "",
+    "javascript": "\/**\r\n\r\nAdds a link to translate the content of any page using\r\nGoogle translate.\r\n\r\nCredit to Pete Jerome for the idea and code for this\r\nas posted in the Moodle.org forum here.\r\nhttps:\/\/moodle.org\/mod\/forum\/discuss.php?d=451202#p1813452\r\n**\/\r\n\r\n\r\nfunction googleTranslateElementInit() {\r\n  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');\r\n}\r\n",
+    "css": "",
+    "html": "<script type=\"text\/javascript\" src=\"http:\/\/translate.google.com\/translate_a\/element.js?cb=googleTranslateElementInit\"><\/script>\r\n<div style=\"position:fixed;left:0;bottom:0;width:156px;height:25px;background-color:white;z-index:1000;\"><\/div><div style=\"position:fixed;left:0;bottom:0;height:25px;text-align:left;z-index:1001;\">\r\n<div id=\"google_translate_element\"><\/div>\r\n\r\n",
+    "pagetype": []
 }]
