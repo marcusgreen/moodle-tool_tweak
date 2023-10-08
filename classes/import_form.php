@@ -48,7 +48,7 @@ class import_form extends \moodleform {
                 'accepted_types' => '*',
             ]
         );
-        $navbuttons[] = $mform->createElement('submit', 'save', get_string('save'));
+        $navbuttons[] = $mform->createElement('submit', 'save', get_string('import'));
         $navbuttons[] = $mform->createElement('submit', 'cancel', get_string('cancel'));
 
         $mform->addGroup($navbuttons);

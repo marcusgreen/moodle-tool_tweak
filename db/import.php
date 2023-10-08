@@ -43,7 +43,7 @@ if ($data = $importform->get_data()) {
     if (isset($data->save)) {
         $content = $importform->get_file_content('jsonfile');
         $recordcount = tool_tweak_import_json($content);
-        $msg = $recordcount. 'records imported';
+        $msg = $recordcount. ' records imported';
         \core\notification::add($msg, \core\notification::WARNING);
 
     }

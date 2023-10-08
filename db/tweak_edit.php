@@ -163,7 +163,7 @@ class tool_tweak_edit_form extends moodleform {
      * @return void
      */
     public function set_data($tweak) {
-        $this->_form->getElement('id')->setValue($tweak->id);
+        $this->_form->getElement('id')->setValue($tweak->id ?? "");
         $this->_form->getElement('tweakname')->setValue($tweak->tweakname ?? "");
         $this->_form->getElement('cohort')->setValue($tweak->cohort ?? "");
         $this->_form->getElement('tag')->setValue($tweak->tag ?? "");

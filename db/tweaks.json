@@ -1,4 +1,4 @@
-<div class="notifytiny debuggingmessage" data-rel="debugging">String does not exist. Please check your string definition for cookiehttponly/admin<ul style="text-align: left" data-rel="backtrace"><li>line 10788 of /lib/moodlelib.php: call to debugging()</li><li>line 167 of /admin/settings/security.php: call to lang_string->__construct()</li><li>line 8707 of /lib/adminlib.php: call to require()</li><li>line 8588 of /lib/adminlib.php: call to admin_get_root()</li><li>line 47 of /admin/tool/tweak/db/tweak_edit.php: call to admin_externalpage_setup()</li></ul></div><div class="notifytiny debuggingmessage" data-rel="debugging">String does not exist. Please check your string definition for configcookiehttponly/admin<ul style="text-align: left" data-rel="backtrace"><li>line 10788 of /lib/moodlelib.php: call to debugging()</li><li>line 167 of /admin/settings/security.php: call to lang_string->__construct()</li><li>line 8707 of /lib/adminlib.php: call to require()</li><li>line 8588 of /lib/adminlib.php: call to admin_get_root()</li><li>line 47 of /admin/tool/tweak/db/tweak_edit.php: call to admin_externalpage_setup()</li></ul></div>[{
+[{
     "tweakname": "Simple question edit",
     "tag": "",
     "cohort": "0",
@@ -56,11 +56,11 @@
     "pagetype": {
         "39": "mod-assign-grader"
     }
-}{
+},{
     "tweakname": "google-translate",
     "tag": "",
     "cohort": "0",
-    "disabled": "0",
+    "disabled": "1",
     "profilefield": "",
     "javascript": "\/**\r\n\r\nAdds a link to translate the content of any page using\r\nGoogle translate.\r\n\r\nCredit to Pete Jerome for the idea and code for this\r\nas posted in the Moodle.org forum here.\r\nhttps:\/\/moodle.org\/mod\/forum\/discuss.php?d=451202#p1813452\r\n**\/\r\n\r\n\r\nfunction googleTranslateElementInit() {\r\n  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');\r\n}\r\n",
     "css": "",
