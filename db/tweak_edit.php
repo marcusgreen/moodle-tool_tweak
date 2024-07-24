@@ -66,6 +66,7 @@ class tool_tweak_edit_form extends moodleform {
      */
     protected function definition() {
         global $PAGE;
+
         $mform = $this->_form;
         // Add the popup CSS hints on pressing ctrl space.
         $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/lib/codemirror.css');
@@ -91,11 +92,12 @@ class tool_tweak_edit_form extends moodleform {
         $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">'
             .get_string('tweakedit:import', 'tool_tweak').'</div></a>');
 
+            xdebug_break();
         $mform->addElement('submit', 'export', get_string('tweakedit:export', 'tool_tweak'));
-        $mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');
 
+        //$mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');
         $mform->addElement('submit', 'exportall', get_string('tweakedit:exportall', 'tool_tweak'));
-        $mform->addHelpButton('exportall', 'tweakedit:exportall', 'tool_tweak');
+        //$mform->addHelpButton('exportall', 'tweakedit:exportall', 'tool_tweak');
 
         $mform->addElement('header', 'editheader', get_string('tweakedit:editheader', 'tool_tweak'));
 
