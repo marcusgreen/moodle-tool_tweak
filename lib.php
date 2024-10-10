@@ -38,7 +38,6 @@
 function tool_tweak_before_footer() {
     global $DB;
     $lib = new tool_tweak\lib();
-
     $cmid = optional_param('cmid', null, PARAM_INT);
     $id = optional_param('id', null , PARAM_INT);
 
@@ -100,7 +99,6 @@ function tool_tweak_import_json(string $json) : int {
         $recordcount++;
         $pagetypes = $field->pagetype;
         unset($field->pagetype);
-        xdebug_break();
         $tweakid = $DB->insert_record('tool_tweak', $field);
         foreach ($pagetypes as $pagetype) {
             $DB->insert_record('tool_tweak_pagetype', ['tweak' => $tweakid, 'pagetype' => $pagetype]);
