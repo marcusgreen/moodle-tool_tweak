@@ -45,9 +45,9 @@ if (is_siteadmin()) {
 
     $ADMIN->add('tweakcategory',
         new admin_externalpage(
-                'tool_tweak_edit',
+                'tool_edit_form',
                     get_string('tweakedit', 'tool_tweak'),
-                    new moodle_url('/admin/tool/tweak/db/tweak_edit.php'),
+                    new moodle_url('/admin/tool/tweak/edit_form.php'),
                 'moodle/site:config'
         ));
 }

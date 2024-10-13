@@ -38,7 +38,7 @@ $PAGE->set_url(new moodle_url('/admin/tool/tweak/import.php'));
 $importform = new  import_form();
 if ($data = $importform->get_data()) {
     if (isset($data->cancel)) {
-        redirect(new moodle_url('/admin/tool/tweak/db/tweak_edit.php'));
+        redirect(new moodle_url('/admin/tool/tweak/edit_form.php'));
     }
     if (isset($data->save)) {
         $content = $importform->get_file_content('jsonfile');
