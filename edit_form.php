@@ -48,7 +48,7 @@ admin_externalpage_setup('tool_edit_form');
 
 /**
  *  Edit tool_tweak code
- *
+ * @package tool_tweak
  * @copyright Marcus Green 2023
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Form for editing tweak (css and javascript)
@@ -92,7 +92,6 @@ class tool_edit_form_form extends moodleform {
         $mform->addElement('static', 'importform', '', '<a href=import.php><div class="btn btn-primary">'
             .get_string('tweakedit:import', 'tool_tweak').'</div></a>');
 
-            xdebug_break();
         $mform->addElement('submit', 'export', get_string('tweakedit:export', 'tool_tweak'));
 
         //$mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');
@@ -262,7 +261,7 @@ if (!$export) {
 
 /**
  * Get the database record to match the current page
- *
+ * @package tool_tweak
  * @param int $page
  * @return \stdClass
  */
@@ -283,6 +282,7 @@ function get_page_record(int $page) : \stdClass {
 /**
  * If no page types given, delete any existing ones
  * Otherwise insert the ones given
+ * @package tool_tweak
  * @param mixed $data
  * @return void
  */
@@ -301,7 +301,7 @@ function  update_pagetypes($data) {
 /**
  * Get the pagetypes (the tweak will act on) for a given
  * tweak record
- *
+ * @package tool_tweak
  * @param stdClass $record
  * @return stdClass
  */
