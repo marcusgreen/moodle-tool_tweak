@@ -23,10 +23,10 @@
  * @copyright  2023 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once('../../../../config.php');
+require_once('../..//../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->libdir.'/formslib.php');
-require_once(__DIR__.'../../lib.php');
+require_once('lib.php');
 require_once("$CFG->dirroot/cohort/lib.php");
 
 use tool_tweak\import_form;
@@ -44,7 +44,7 @@ $exportall = optional_param('exportall', '', PARAM_TEXT);
 
 $context = context_system::instance();
 $PAGE->set_context($context);
-admin_externalpage_setup('tool_tweak_edit');
+admin_externalpage_setup('tool_edit_form');
 
 /**
  *  Edit tool_tweak code
@@ -53,7 +53,7 @@ admin_externalpage_setup('tool_tweak_edit');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * Form for editing tweak (css and javascript)
  */
-class tool_tweak_edit_form extends moodleform {
+class tool_edit_form_form extends moodleform {
     /**
      * Undocumented variable
      *
@@ -72,7 +72,7 @@ class tool_tweak_edit_form extends moodleform {
         $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/lib/codemirror.css');
 
         $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/addon/hint/show-hint.css');
-        $PAGE->requires->js_call_amd('tool_tweak/tweak_edit', 'init');
+        $PAGE->requires->js_call_amd('tool_tweak/edit_form', 'init');
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
@@ -206,11 +206,11 @@ if ($delete ) {
         $recordcount = 1;
     }
 }
-$baseurl = new moodle_url('/admin/tool/tweak/db/tweak_edit.php', ['page' => $page]);
+$baseurl = new moodle_url('/admin/tool/tweak/edit_form.php', ['page' => $page]);
 
 $record->page = $page;
 
-$mform = new tool_tweak_edit_form($baseurl);
+$mform = new tool_edit_form_form($baseurl);
 
 if ($data = $mform->get_data()) {
     if (isset($data->save)) {

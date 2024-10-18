@@ -29,12 +29,64 @@ require_once($CFG->dirroot.'/user/profile/lib.php');
  */
 class lib {
     /**
+     * Output items at the end of pages
+     * @return void
+     */
+    public static function before_standard_footer_html_generation(\core\hook\output\before_standard_footer_html_generation $hook): void {
+        global $DB;
+
+        $cmid = optional_param('cmid', null, PARAM_INT);
+        $id = optional_param('id', null , PARAM_INT);
+
+        $cmid = $cmid ?? $id;
+        self::show_pagetype();
+        $cache = \cache::make('tool_tweak', 'tweakdata');
+        if (($tweaks = $cache->get('tweaks')) === false) {
+            $tweaks = self::get_all_tweaks();
+            $cache->set('tweaks', $tweaks);
+        }
+
+        if (get_config('tool_tweak', 'disablecache')) {
+            $tweaks = self::get_all_tweaks();
+        }
+
+        $tweaks = self::filter_by_cohort($tweaks);
+        $tweaks = self::filter_by_pagetype($tweaks);
+        $tweaks = self::filter_by_profilefield($tweaks);
+        if ($cmid) {
+            $tweaks = self::filter_by_tag($tweaks, $cmid);
+        }
+        $tweakids = [];
+        foreach ($tweaks as $tweak) {
+            $tweakids[$tweak->id] = $tweak->id;
+        }
+        if (count($tweakids)) {
+            [$insql, $inparams] = $DB->get_in_or_equal($tweakids);
+            $sql = "SELECT * FROM {tool_tweak} WHERE id $insql";
+            $fulltweaks = $DB->get_records_sql($sql, $inparams);
+        }
+
+        $content = '';
+        if (isset($fulltweaks)) {
+            foreach ($fulltweaks as $tweak) {
+                        $content .= $tweak->html. PHP_EOL;
+                        $content .= '<script>'.$tweak->javascript. '</script>'.PHP_EOL;
+                        $content .= '<style>'.$tweak->css. '</style>'.PHP_EOL;
+            }
+        }
+
+        $content = self::php_get_string($content);
+
+        $hook->add_html($content);
+
+    }
+    /**
      * If a tweak has a cohort but the current user is not in that cohort
      * remove the tweak from alltweaks.
      * @param array $tweaks
      * @return array
      */
-    public function filter_by_cohort(array $tweaks) :array {
+    public static function filter_by_cohort(array $tweaks) :array {
         global $DB, $USER;
         $cache = \cache::make('tool_tweak', 'tweakdata');
         if (($usercohorts = $cache->get('usercohorts')) === false) {
@@ -59,7 +111,7 @@ class lib {
      * @param array $tweaks
      * @return array
      */
-    public function filter_by_pagetype(array $tweaks) : array {
+    public static function filter_by_pagetype(array $tweaks) : array {
         global $PAGE;
         $pagetype = $PAGE->pagetype;
         $parts = explode('-', $PAGE->pagetype);
@@ -81,8 +133,8 @@ class lib {
      * @param int $cmid
      * @return array
      */
-    public function filter_by_tag(array $tweaks, int $cmid) : array {
-        $plugintags = $this->get_plugintags($cmid);
+    public static function filter_by_tag(array $tweaks, int $cmid) : array {
+        $plugintags = self::get_plugintags($cmid);
         foreach ($tweaks as $key => $tweak) {
             if ($tweak->tag) {
                 if (!in_array($tweak->tag, $plugintags )) {
@@ -99,7 +151,7 @@ class lib {
      * @param array $tweaks
      * @return array
      */
-    public function filter_by_profilefield(array $tweaks) : array {
+    public static function filter_by_profilefield(array $tweaks) : array {
         global $USER;
         foreach ($tweaks as $key => $tweak) {
             if ($tweak->profilefield <> '') {
@@ -119,7 +171,7 @@ class lib {
      *
      * @return array
      */
-    public function get_all_tweaks() : array {
+    public static function get_all_tweaks():  array {
         global $DB;
         $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype, disabled, profilefield FROM {tool_tweak} tweak
                 LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id
@@ -138,7 +190,7 @@ class lib {
      * @param mixed $cmid
      * @return mixed
      */
-    private function get_plugintags($cmid) {
+    private static function get_plugintags($cmid) {
         global $DB;
         $sql = "SELECT name as tagname
                 FROM {tag_instance} ti
@@ -157,7 +209,7 @@ class lib {
      * @param string $content
      * @return string
      */
-    public function php_get_string(string $content) {
+    public static function php_get_string(string $content) {
         preg_match_all('/get_string\\(.*?\)/', $content, $matches);
         foreach ($matches[0] as $functioncall) {
             $toreplace = $functioncall;
@@ -182,10 +234,27 @@ class lib {
      *
      * @return array
      */
-    public function get_distinct_pagetypes() : array {
+    public static function get_distinct_pagetypes() : array {
         global $DB;
         $pagetypes = $DB->get_records_sql('SELECT DISTINCT pagetype FROM {tool_skin_pagetype}');
         return array_keys($pagetypes);
+    }
+    /**
+     * Show the page type to the admin user
+     * Purely for debug and setup
+     */
+    public static function show_pagetype(): void {
+
+        global $USER, $PAGE, $OUTPUT;
+        if (get_config('tool_tweak', 'showpagetype')) {
+            if (is_siteadmin($USER->id)) {
+                $msg = 'page-type:'.$PAGE->pagetype;
+                ob_start();
+                echo $msg;
+                // echo $OUTPUT->notification($msg);
+            // \core\notification::add($msg, \core\notification::WARNING);
+            }
+        }
     }
 
 }

@@ -35,7 +35,7 @@
  * @throws coding_exception
  * @throws dml_exception
  */
-function tool_tweak_before_footer() {
+function _tool_tweak_before_footer() {
     global $DB;
     $lib = new tool_tweak\lib();
     $cmid = optional_param('cmid', null, PARAM_INT);
@@ -106,20 +106,4 @@ function tool_tweak_import_json(string $json) : int {
     }
     return $recordcount;
 }
-/**
- * Show the page type to the admin user
- * Purely for debug and setup
- */
-function tool_tweak_show_pagetype() : void {
 
-    global $USER, $PAGE, $OUTPUT;
-    if (get_config('tool_tweak', 'showpagetype')) {
-        if (is_siteadmin($USER->id)) {
-            $msg = 'page-type:'.$PAGE->pagetype;
-            ob_start();
-            echo $msg;
-            // echo $OUTPUT->notification($msg);
-           // \core\notification::add($msg, \core\notification::WARNING);
-        }
-    }
-}
