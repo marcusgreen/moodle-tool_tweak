@@ -28,11 +28,15 @@ require_once($CFG->dirroot.'/user/profile/lib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib {
+
     /**
+     *
      * Output items at the end of pages
+     * @param \core\hook\output\before_standard_footer_html_generation $hook
      * @return void
      */
-    public static function before_standard_footer_html_generation(\core\hook\output\before_standard_footer_html_generation $hook): void {
+    public static function before_standard_footer_html_generation(
+        \core\hook\output\before_standard_footer_html_generation $hook): void {
         global $DB;
 
         $cmid = optional_param('cmid', null, PARAM_INT);
@@ -70,13 +74,12 @@ class lib {
         if (isset($fulltweaks)) {
             foreach ($fulltweaks as $tweak) {
                         $content .= $tweak->html. PHP_EOL;
-                        $content .= '<script> debugger; var current_language="'.current_language().'";'.PHP_EOL.$tweak->javascript. '</script>'.PHP_EOL;
+                        $content .= '<script> debugger; var current_language="'.current_language().'";'
+                        .PHP_EOL.$tweak->javascript. '</script>'.PHP_EOL;
                         $content .= '<style>'.$tweak->css. '</style>'.PHP_EOL;
             }
         }
-
         $content = self::php_get_string($content);
-
         $hook->add_html($content);
 
     }
@@ -230,18 +233,18 @@ class lib {
     }
     /**
      * Get unique id values for all pagetypes currently stored
-     * for this plugin
+     * for this plugin (is this actually needed?)
      *
      * @return array
      */
-    public static function get_distinct_pagetypes() : array {
+    public static function get_distinct_pagetypes(): array {
         global $DB;
-        $pagetypes = $DB->get_records_sql('SELECT DISTINCT pagetype FROM {tool_skin_pagetype}');
+        $pagetypes = $DB->get_records_sql('SELECT DISTINCT pagetype FROM {tool_tweak_pagetype}');
         return array_keys($pagetypes);
     }
     /**
      * Show the page type to the admin user
-     * Purely for debug and setup
+     * Purely for debug and setup doesn't work on some pages
      */
     public static function show_pagetype(): void {
 
@@ -249,10 +252,7 @@ class lib {
         if (get_config('tool_tweak', 'showpagetype')) {
             if (is_siteadmin($USER->id)) {
                 $msg = 'page-type:'.$PAGE->pagetype;
-                ob_start();
-                echo $msg;
-                // echo $OUTPUT->notification($msg);
-            // \core\notification::add($msg, \core\notification::WARNING);
+                \core\notification::add($msg, \core\notification::WARNING);
             }
         }
     }
