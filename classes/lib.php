@@ -70,7 +70,7 @@ class lib {
         if (isset($fulltweaks)) {
             foreach ($fulltweaks as $tweak) {
                         $content .= $tweak->html. PHP_EOL;
-                        $content .= '<script>'.$tweak->javascript. '</script>'.PHP_EOL;
+                        $content .= '<script> debugger; var current_language="'.current_language().'";'.PHP_EOL.$tweak->javascript. '</script>'.PHP_EOL;
                         $content .= '<style>'.$tweak->css. '</style>'.PHP_EOL;
             }
         }
@@ -86,7 +86,7 @@ class lib {
      * @param array $tweaks
      * @return array
      */
-    public static function filter_by_cohort(array $tweaks) :array {
+    public static function filter_by_cohort(array $tweaks): array {
         global $DB, $USER;
         $cache = \cache::make('tool_tweak', 'tweakdata');
         if (($usercohorts = $cache->get('usercohorts')) === false) {

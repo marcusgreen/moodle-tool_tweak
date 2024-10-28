@@ -94,9 +94,7 @@ class tool_edit_form_form extends moodleform {
 
         $mform->addElement('submit', 'export', get_string('tweakedit:export', 'tool_tweak'));
 
-        //$mform->addHelpButton('export', 'tweakedit:export', 'tool_tweak');
         $mform->addElement('submit', 'exportall', get_string('tweakedit:exportall', 'tool_tweak'));
-        //$mform->addHelpButton('exportall', 'tweakedit:exportall', 'tool_tweak');
 
         $mform->addElement('header', 'editheader', get_string('tweakedit:editheader', 'tool_tweak'));
 
