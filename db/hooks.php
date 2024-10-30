@@ -29,5 +29,9 @@ $callbacks = [
         'hook' => \core\hook\output\before_standard_footer_html_generation::class,
         'callback' => 'tool_tweak\lib::before_standard_footer_html_generation',
     ],
+    [
+        'hook' => \core\hook\output\before_standard_head_html_generation::class,
+        'callback' => 'tool_tweak\lib::before_standard_head_html_generation',
+    ],
 
 ];

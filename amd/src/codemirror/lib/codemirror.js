@@ -2893,7 +2893,7 @@
     return height || 1
   }
 
-  // Compute the default character width.
+  // Compute the default character wiid_questiontextdth.
   function charWidth(display) {
     if (display.cachedCharWidth != null) { return display.cachedCharWidth }
     var anchor = elt("span", "xxxxxxxxxx");

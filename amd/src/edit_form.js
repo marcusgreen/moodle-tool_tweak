@@ -33,21 +33,21 @@ import 'tool_tweak/codemirror/mode/markdown/markdown';
 import 'tool_tweak/codemirror/mode/meta/meta';
 import 'tool_tweak/codemirror/mode/htmlmixed/htmlmixed';
 
-export const init = () => {
-    var editor = CodeMirror.fromTextArea(document.getElementById("id_css"), {
+export const init = (javascript, css, html) => {
+  var editor = CodeMirror.fromTextArea(document.getElementById(css), {
         lineNumbers: true,
         mode: 'text/css',
         extraKeys: {"Ctrl-Space": "autocomplete"}
           });
    editor.setSize('100%', 200);
 
-   var editor = CodeMirror.fromTextArea(document.getElementById("id_javascript"), {
+   var editor = CodeMirror.fromTextArea(document.getElementById(javascript), {
     lineNumbers: true,
     mode: {name: "javascript", globalVars: true},
     extraKeys: {"Ctrl-Space": "autocomplete"}
       });
 
-   var editor = CodeMirror.fromTextArea(document.getElementById("id_html"), {
+   var editor = CodeMirror.fromTextArea(document.getElementById(html), {
     lineNumbers: true,
     mode: {name: "htmlmixed"},
     extraKeys: {"Ctrl-Space": "autocomplete"}

@@ -28,6 +28,20 @@ require_once($CFG->dirroot.'/user/profile/lib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class lib {
+    /**
+     * Summary of before_standard_head_html_generation
+     * @param \core\hook\output\before_standard_head_html_generation $hook
+     * @return void
+     * @package tool_tweak
+     */
+    public static function before_standard_head_html_generation(
+        \core\hook\output\before_standard_head_html_generation $hook,
+
+    ): void {
+        global $DB, $PAGE;
+        $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/lib/codemirror.css');
+        $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/addon/hint/show-hint.css');
+    }
 
     /**
      *
@@ -36,9 +50,8 @@ class lib {
      * @return void
      */
     public static function before_standard_footer_html_generation(
-        \core\hook\output\before_standard_footer_html_generation $hook): void {
+    \core\hook\output\before_standard_footer_html_generation $hook): void {
         global $DB;
-
         $cmid = optional_param('cmid', null, PARAM_INT);
         $id = optional_param('id', null , PARAM_INT);
 
@@ -74,12 +87,15 @@ class lib {
         if (isset($fulltweaks)) {
             foreach ($fulltweaks as $tweak) {
                         $content .= $tweak->html. PHP_EOL;
-                        $content .= '<script> debugger; var current_language="'.current_language().'";'
+                        $content .= '<script>var current_language="'.current_language().'";'
                         .PHP_EOL.$tweak->javascript. '</script>'.PHP_EOL;
                         $content .= '<style>'.$tweak->css. '</style>'.PHP_EOL;
             }
         }
         $content = self::php_get_string($content);
+        global $PAGE;
+        $PAGE->requires->js_call_amd('tool_tweak/edit_form', 'init', ['javascript' => 'id_questiontext']);
+
         $hook->add_html($content);
 
     }
@@ -114,7 +130,7 @@ class lib {
      * @param array $tweaks
      * @return array
      */
-    public static function filter_by_pagetype(array $tweaks) : array {
+    public static function filter_by_pagetype(array $tweaks): array {
         global $PAGE;
         $pagetype = $PAGE->pagetype;
         $parts = explode('-', $PAGE->pagetype);
@@ -136,7 +152,7 @@ class lib {
      * @param int $cmid
      * @return array
      */
-    public static function filter_by_tag(array $tweaks, int $cmid) : array {
+    public static function filter_by_tag(array $tweaks, int $cmid): array {
         $plugintags = self::get_plugintags($cmid);
         foreach ($tweaks as $key => $tweak) {
             if ($tweak->tag) {
@@ -154,7 +170,7 @@ class lib {
      * @param array $tweaks
      * @return array
      */
-    public static function filter_by_profilefield(array $tweaks) : array {
+    public static function filter_by_profilefield(array $tweaks): array {
         global $USER;
         foreach ($tweaks as $key => $tweak) {
             if ($tweak->profilefield <> '') {
@@ -174,7 +190,7 @@ class lib {
      *
      * @return array
      */
-    public static function get_all_tweaks():  array {
+    public static function get_all_tweaks(): array {
         global $DB;
         $sql = 'SELECT tweak.id, tweakname, cohort,tag,pagetype, disabled, profilefield FROM {tool_tweak} tweak
                 LEFT JOIN {tool_tweak_pagetype} pagetype on pagetype.tweak=tweak.id

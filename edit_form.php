@@ -72,7 +72,12 @@ class tool_edit_form_form extends moodleform {
         $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/lib/codemirror.css');
 
         $PAGE->requires->css('/admin/tool/tweak/amd/src/codemirror/addon/hint/show-hint.css');
-        $PAGE->requires->js_call_amd('tool_tweak/edit_form', 'init');
+        $params = [
+            'javascript' => 'id_javascript',
+            'css' => 'id_css',
+            'html' => 'id_html',
+        ];
+        $PAGE->requires->js_call_amd('tool_tweak/edit_form', 'init', $params);
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
