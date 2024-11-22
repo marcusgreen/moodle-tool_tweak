@@ -134,17 +134,15 @@ class lib {
         global $PAGE;
         $pagetype = $PAGE->pagetype;
         $parts = explode('-', $PAGE->pagetype);
-        $plugintype = $parts[0].'-'.$parts[1];
-        foreach ($tweaks as $key => $tweak) {
-            if ($tweak->pagetype) {
-                if (($tweak->pagetype !== $pagetype) && ($tweak->pagetype !== $plugintype)) {
-                    unset($tweaks[$key]);
-                }
-            }
+        if (count($parts) > 1) {
+            $plugintype = $parts[0].'-'.$parts[1];
+        } else {
+            // Is this really correct?.
+            $plugintype = $pagetype;
         }
         return $tweaks;
-
     }
+
     /**
      * Filter out tags that require tags not found
      * in the current module setup.
