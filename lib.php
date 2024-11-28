@@ -37,6 +37,9 @@
  */
 function _tool_tweak_before_footer() {
     global $DB;
+    if (! get_config('tool_tweak', 'enabled')) {
+        return;
+    }
     $lib = new tool_tweak\lib();
 
     $cmid = optional_param('cmid', null, PARAM_INT);

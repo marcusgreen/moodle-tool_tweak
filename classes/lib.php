@@ -34,7 +34,9 @@ class lib {
      */
     public static function before_standard_footer_html_generation(\core\hook\output\before_standard_footer_html_generation $hook): void {
         global $DB;
-
+        if (! get_config('tool_tweak', 'enabled')) {
+            return;
+        }
         $cmid = optional_param('cmid', null, PARAM_INT);
         $id = optional_param('id', null , PARAM_INT);
 

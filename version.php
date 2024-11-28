@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'tool_tweak';
 $plugin->release = '0.1.0';
-$plugin->version = 2023031210;
+$plugin->version = 2023031212;
 $plugin->requires = 2021051700;
 $plugin->maturity = MATURITY_ALPHA;

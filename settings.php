@@ -36,7 +36,11 @@ if (is_siteadmin()) {
         "mod-quiz-attempt, mod-quiz-review",
          PARAM_RAW, 20, 3));
 
-    $settingspage->add(new admin_setting_configcheckbox('tool_tweak/showpagetype',
+    $settingspage->add(new admin_setting_configcheckbox('tool_stackui/enabled',
+         get_string('settings:enabled', 'tool_tweak'),
+         get_string('settings:enabled_text', 'tool_tweak') , 0));
+
+         $settingspage->add(new admin_setting_configcheckbox('tool_tweak/showpagetype',
          get_string('settings:showpagetype', 'tool_tweak'),
          get_string('settings:showpagetype_text', 'tool_tweak') , 0));
     $settingspage->add(new admin_setting_configcheckbox('tool_tweak/disablecache',

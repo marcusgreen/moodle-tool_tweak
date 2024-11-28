@@ -74,3 +74,8 @@ $string['tweakedit:profilefield_help'] = 'Shortname of a checkbox user profile f
 $string['tweakedit:html_help'] = 'HTML put here is output before any javascript in the tweak. Put links to Content delivery systems (CDN\'s) here';
 $string['cachedef_tweak'] = 'Description of the tweak data cache';
 $string['returntoediting'] = 'Return to editing';
+$string['settings:enabled'] = 'Enabled';
+$string['settings:enabled_text'] = 'Enable and disable the plugin ';
+
+
+
